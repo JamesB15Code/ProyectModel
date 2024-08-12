@@ -25,9 +25,12 @@ def predict():
     
     # Hacer la predicción
     prediction = modelo_svm.predict(data_scaled)
+
+    # Convertir el resultado en una respuesta comprensible
+    resultado = "El paciente si tiene diabetes." if int(prediction[0]) == 1 else "El paciente no tiene diabetes."
     
     # Retornar la predicción
-    return jsonify({'Resultado': prediction[0]})
+    return jsonify({'Resultado': resultado})
 
 if __name__ == '__main__':
     app.run(debug=True)
