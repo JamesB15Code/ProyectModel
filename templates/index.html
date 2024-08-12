@@ -59,6 +59,15 @@
                 class="bg-indigo-600 hover:bg-indigo-500 p-3 rounded text-white w-full font-bold ">
         </form>
 
+                <!-- Modal -->
+        <div id="resultModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div class="bg-white p-8 rounded shadow-lg max-w-lg w-full">
+                <h2 class="text-xl font-bold mb-4">Resultado de la Predicción</h2>
+                <div id="modalContent" class="text-lg mb-4"></div>
+                <button id="closeModal" class="bg-indigo-600 hover:bg-indigo-500 p-3 rounded text-white w-full font-bold">Cerrar</button>
+            </div>
+        </div>
+
         <div id="result">
 
         </div>
@@ -89,15 +98,18 @@
             });
 
             const result = await response.json();
+            
 
-            //insert in div #result
-            divResult.innerHTML = `
-                <div class="font-bold text-center">
-                    ${result.Resultado}
-                </div>
-                `;
+            // Mostrar el modal con el resultado
+            const resultModal = document.getElementById('resultModal');
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `${result.Resultado}`;
+            resultModal.classList.remove('hidden');
 
-
+            // Cerrar el modal
+            document.getElementById('closeModal').onclick = function () {
+                resultModal.classList.add('hidden');
+            };
         };
     </script>
 </body>
